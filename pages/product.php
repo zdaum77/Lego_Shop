@@ -4,7 +4,7 @@ require "parts/header.php";
 $database = connectToDB();
 
 if (!isset($_SESSION['user'])) {
-    echo "<p>You must be logged in to view the product or leave a review.</p>";
+    echo "<p>You must be logged in to view the product or buy it</p>";
     exit;
 }
 
