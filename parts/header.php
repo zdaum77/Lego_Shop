@@ -27,7 +27,7 @@
     <div class="headah">
       <nav class="header navbar navbar-expand-lg">
         <div class="container-fluid">
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="/home">
             <img
               src="brand-lego.svg"
               alt="LEGO"
