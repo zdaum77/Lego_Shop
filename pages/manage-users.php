@@ -66,7 +66,7 @@
                     ><i class="bi bi-key"></i
                   ></a>
   
-                  <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#userDeleteModal-<?php echo $user['id']; ?>">
+                  <button type="button" class="btn btn-danger btn-sm <?php if ( $user['role'] === "admin" ) { echo "disabled";}?>" data-bs-toggle="modal" data-bs-target="#userDeleteModal-<?php echo $user['id']; ?>">
                      <i class="bi bi-trash"></i>
                   </button>
 
