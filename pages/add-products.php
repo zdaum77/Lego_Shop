@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: /shop");
             exit;
         } else {
-            $error = "Failed to add product to database.";
+            $error = "Please login to add your own product.";
         }
     } elseif (!$error) {
         $error = "All fields are required.";
