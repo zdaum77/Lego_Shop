@@ -18,13 +18,13 @@ $cart = $query->fetch();
 
 if ($cart) {
     $cart_id = $cart['cart_id'];
-    $deleteStmt = $database->prepare
+    $delete = $database->prepare
     ("  DELETE 
         FROM cart_items 
         WHERE cart_id = :cart_id 
         AND product_id = :product_id
     ");
-    $deleteStmt->execute([
+    $delete->execute([
         'cart_id' => $cart_id,
         'product_id' => $product_id
     ]);

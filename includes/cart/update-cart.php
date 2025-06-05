@@ -19,12 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['quantities'])) {
     foreach ($_POST['quantities'] as $product_id => $quantity) {
         $quantity = max(1, (int)$quantity);
 
-        $updateStmt = $database->prepare
+        $update = $database->prepare
         ("  UPDATE cart_items 
             SET quantity = :quantity 
             WHERE cart_id = :cart_id AND product_id = :product_id
         ");
-        $updateStmt->execute([
+        $update->execute([
             'quantity' => $quantity,
             'cart_id' => $cart_id,
             'product_id' => $product_id

@@ -14,10 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $uploadDir = 'uploads/';
         $uploadPath = $uploadDir . $imageName;
 
-        if (!file_exists($uploadDir)) {
-            mkdir($uploadDir, 0777, true);
-        }
-
         if (move_uploaded_file($imageTmp, $uploadPath)) {
             $image = $uploadPath;
         } else {

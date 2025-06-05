@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 $database = connectToDB();
 
 
@@ -55,7 +55,7 @@ if ($item) {
     ]);
 
 
-    
+
 } else {
     //dis for inserting in the tableh as a new row
     $insert = $database->prepare

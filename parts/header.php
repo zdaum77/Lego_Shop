@@ -9,6 +9,10 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+       <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
+    />
     <link rel="icon" class="icon" href="brand-lego.svg" type="image/x-icon" />
     <style>
       body{
@@ -17,6 +21,7 @@
     </style>
   </head>
   <body>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <div class="headah">
@@ -50,6 +55,11 @@
               <li class="nav-item">
                 <a class="nav-link" href="/cart">YOUR CART</a>
               </li>
+          <?php if ( isAdmin() ) : ?>
+              <li class="nav-item">
+                <a class="nav-link" href="/manage-users">MANAGE USERS</a>
+              </li>
+          <?php endif; ?>
         
               <li class="button nav-item">
                 <a class="nav-link text-danger" href="/all-sets">ALL SETS</a>
@@ -57,18 +67,20 @@
 
             </ul>
             <ul class="navbar-nav nav-underline ms-auto mb-2 mb-lg-0">
+            <?php if ( isUserLoggedIn() ) : ?>
               <li class="nav-item">
-                <a class="nav-link" href="/login">Login</a>
+                  <a class="nav-link" href="/logout">Logout</a>
+              </li>
+            <?php else : ?>
+              <li class="nav-item">
+                  <a class="nav-link" href="/login">Login</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/signup">Sign Up</a>
+                  <a class="nav-link" href="/signup">Sign Up</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/logout">Logout</a>
-              </li>
-
+            <?php endif; ?>
             </ul>
-            
+
           </div>
         </div>
       </nav>

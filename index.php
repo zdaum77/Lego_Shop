@@ -22,6 +22,31 @@
       case '/logout':
         require "pages/logout.php";
         break;
+      case "/manage-users":
+        require "pages/manage-users.php";
+        break;
+      case "/manage-users-add":
+        require "pages/manage-users-add.php";
+        break;
+      case "/manage-users-edit":
+        require "pages/manage-users-edit.php";
+        break;
+      case "/manage-users-changepwd":
+        require "pages/manage-users-changepwd.php";
+        break;
+      case '/user/add':
+        require "includes/user/add.php";
+        break;
+      // setup the action for delete user
+      case '/user/delete':
+        require "includes/user/delete.php";
+        break;
+      case '/user/update':
+        require "includes/user/update.php";
+        break;
+      case '/user/changepwd':
+        require "includes/user/changepwd.php";
+        break;
       case "/all-sets":
         require "pages/a.php";
         break;

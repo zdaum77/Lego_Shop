@@ -31,11 +31,20 @@
             <li class="nav-item"><a class="nav-link" href="/cart">YOUR CART</a></li>
             <li class="button nav-item"><a class="nav-link text-danger" href="/all-sets">ALL SETS</a></li>
           </ul>
-          <ul class="navbar-nav nav-underline ms-auto mb-2 mb-lg-0">
-            <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
-            <li class="nav-item"><a class="nav-link" href="/signup">Sign Up</a></li>
-            <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
-          </ul>
+            <ul class="navbar-nav nav-underline ms-auto mb-2 mb-lg-0">
+            <?php if ( isUserLoggedIn() ) : ?>
+              <li class="nav-item">
+                  <a class="nav-link" href="/logout">Logout</a>
+              </li>
+            <?php else : ?>
+              <li class="nav-item">
+                  <a class="nav-link" href="/login">Login</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="/signup">Sign Up</a>
+              </li>
+            <?php endif; ?>
+            </ul>
         </div>
       </div>
     </nav>

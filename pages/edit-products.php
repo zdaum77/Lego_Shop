@@ -2,7 +2,7 @@
 require "parts/header.php";
 $database = connectToDB();
 
-// Check if user is logged in
+
 if (!isset($_SESSION['user'])) {
     echo "<p>You must be logged in to edit a product.</p>";
     exit;
@@ -10,10 +10,10 @@ if (!isset($_SESSION['user'])) {
 
 $user_id = $_SESSION['user']['id'];
 
-// Get product ID
+
 $product_id = $_GET['id'] ?? 0;
 
-// Fetch product
+
 $role = $_SESSION['user']['role'];
 
 if ($role === 'admin' || $role === 'editor') {
@@ -37,22 +37,17 @@ if (!$product) {
 $error = '';
 $success = false;
 
-// Handle update submission
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
     $price = $_POST['price'];
     $description = $_POST['description'];
 
-    // Optional image upload
     if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
         $imageTmp = $_FILES['image']['tmp_name'];
         $imageName = basename($_FILES['image']['name']);
         $uploadDir = 'uploads/';
         $uploadPath = $uploadDir . $imageName;
-
-        if (!file_exists($uploadDir)) {
-            mkdir($uploadDir, 0777, true);
-        }
 
         if (move_uploaded_file($imageTmp, $uploadPath)) {
             $product['image'] = $uploadPath;
@@ -61,7 +56,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
+
+
     if (!$error) {
+        $query = $database->prepare("UPDATE products SET name = :name, price = :price, description = :description, image = :image WHERE product_id = :product_id");
+        $success = $query->execute([
+            'name' => $name,
+            'price' => $price,
+            'description' => $description,
+            'image' => $product['image'],
+            'product_id' => $product_id,
+        ]);
+        }    else {
         $query = $database->prepare("UPDATE products SET name = :name, price = :price, description = :description, image = :image WHERE product_id = :product_id AND user_id = :user_id");
         $success = $query->execute([
             'name' => $name,
@@ -71,7 +77,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'product_id' => $product_id,
             'user_id' => $user_id
         ]);
-
+        
+        }
         if ($success) {
             header("Location: /product?id=$product_id");
             exit;
@@ -79,15 +86,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error = "Failed to update product.";
         }
     }
-}
+
 ?>
 
-<div class="container my-5">
-    <div class="card p-4">
-        <h2>Edit Product</h2>
+<div class="containeh my-5">
+    <h2>Edit Product</h2>
+    <div class="cared p-4 justify-content-center align-items-center d-flex ">
         <form method="POST" enctype="multipart/form-data">
             <label>Product Name:<br>
-                <input type="text" name="name" value="<?= htmlspecialchars($product['name']) ?>" class="input" required>
+                <input type="text" name="name" value="<?= ($product['name']) ?>" class="input" required>
             </label><br><br>
 
             <label>Price:<br>
@@ -95,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </label><br><br>
 
             <label>Description:<br>
-                <textarea name="description" rows="4" cols="30" class="input" required><?= htmlspecialchars($product['description']) ?></textarea>
+                <textarea name="description" rows="4" cols="30" class="input" required><?= ($product['description']) ?></textarea>
             </label><br><br>
 
             <label>Current Image:<br>
