@@ -1,7 +1,7 @@
 <?php
 require "parts/header.php";
 
-// Redirect if not logged in
+//redirect if u not logged in
 if (!isset($_SESSION['user'])) {
     echo "<p>Please <a href='/login'>log in</a> to view your cart.</p>";
     exit;
@@ -10,7 +10,7 @@ if (!isset($_SESSION['user'])) {
 $database = connectToDB();
 $user_id = $_SESSION['user']['id'];
 
-// Get cart id
+//get da cart id
 $query = $database->prepare("SELECT cart_id FROM carts WHERE user_id = :user_id");
 $query->execute(['user_id' => $user_id]);
 $cart = $query->fetch();
@@ -22,7 +22,7 @@ if (!$cart) {
 
 $cart_id = $cart['cart_id'];
 
-// Get cart items with product info
+//get da cart item with the info
 $sql = "SELECT ci.quantity, p.* FROM cart_items ci 
         JOIN products p ON ci.product_id = p.product_id
         WHERE ci.cart_id = :cart_id";
